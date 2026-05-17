@@ -96,8 +96,8 @@ L'intelligence du système a été forgée via un processus rigoureux (disponibl
 
 ### 1. Cloner le dépôt
 ```bash
-git clone https://github.com/Hardrach/diabetai.git
-cd diabetai
+git clone https://github.com/Hardrach/systeme-intelligent-prediction-diabete.git
+cd systeme-intelligent-prediction-diabete
 ```
 
 ### 2. Démarrer le Backend (API Flask)
