@@ -12,6 +12,8 @@
 
 Projet académique d'excellence combinant **Science des Données** et **Intelligence Artificielle Avancée**.
 
+[🌐 Voir la Démo en Ligne (Vercel)](https://systeme-intelligent-prediction-diab.vercel.app/) · [🔌 API Backend Local] · [📓 Data Science Notebook]
+
 </div>
 
 ---
@@ -121,7 +123,9 @@ cd frontend
 npm install
 npm run dev
 ```
-> L'interface sera accessible sur `http://localhost:5173`
+> L'interface locale sera accessible sur `http://localhost:5173`
+
+> **Note :** Le frontend est également déployé en ligne sur **[Vercel](https://systeme-intelligent-prediction-diab.vercel.app/)**. Cependant, la démo en ligne nécessite que le backend soit hébergé. Pour une utilisation optimale, l'environnement local est recommandé.
 
 *(Note : Si sous Windows vous avez une erreur d'exécution de script PowerShell, tapez `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass` avant vos commandes).*
 
