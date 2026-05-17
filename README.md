@@ -12,8 +12,6 @@
 
 Projet académique d'excellence combinant **Science des Données** et **Intelligence Artificielle Avancée**.
 
-[🚀 Démo Frontend (Vercel)](#) · [📡 API Backend (Render)](#) · [📓 Data Science Notebook](#)
-
 </div>
 
 ---
@@ -24,7 +22,6 @@ Projet académique d'excellence combinant **Science des Données** et **Intellig
 - [Architecture Technique](#-architecture-technique)
 - [Pipeline d'Intelligence Artificielle](#-pipeline-dintelligence-artificielle)
 - [Installation en Local](#-installation-en-local)
-- [Guide de Déploiement (Production)](#-guide-de-déploiement-production)
 - [Documentation de l'API](#-documentation-de-lapi)
 - [Auteur](#-auteur)
 
@@ -47,7 +44,6 @@ Le projet est divisé en trois pôles d'expertise :
 - 🧠 **Decision Layer métier** classifiant le risque en 3 niveaux (Faible, Moyen, Élevé) avec recommandations associées.
 - 🎨 **Interface premium "Medical Dark Theme"** avec animations fluides (Framer Motion).
 - 🛡️ **Validation stricte des données** côté client et serveur.
-- 🚀 **Architecture prête pour la production** (Vercel & Render).
 
 ---
 
@@ -128,34 +124,6 @@ npm run dev
 > L'interface sera accessible sur `http://localhost:5173`
 
 *(Note : Si sous Windows vous avez une erreur d'exécution de script PowerShell, tapez `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass` avant vos commandes).*
-
----
-
-## 🚀 Guide de Déploiement (Production)
-
-L'application est conçue pour être déployée gratuitement et facilement.
-
-### 1. Backend (Déploiement sur Render)
-1. Créez un compte sur [Render](https://render.com).
-2. Cliquez sur **New** ➜ **Web Service**.
-3. Connectez votre dépôt GitHub.
-4. Paramètres de configuration :
-   - **Root Directory** : `backend`
-   - **Build Command** : `pip install -r requirements.txt`
-   - **Start Command** : `gunicorn app:app --bind 0.0.0.0:$PORT --workers 1 --timeout 120`
-5. Cliquez sur **Create Web Service**. 
-6. Copiez l'URL générée (ex: `https://diabetai-api.onrender.com`).
-
-### 2. Frontend (Déploiement sur Vercel)
-1. Créez un compte sur [Vercel](https://vercel.com).
-2. Cliquez sur **Add New** ➜ **Project**.
-3. Importez votre dépôt GitHub.
-4. Paramètres de configuration :
-   - **Root Directory** : `frontend`
-   - **Framework Preset** : `Vite`
-5. **Variables d'environnement** :
-   - Ajoutez `VITE_API_URL` avec la valeur de l'URL de votre backend Render.
-6. Cliquez sur **Deploy**.
 
 ---
 
