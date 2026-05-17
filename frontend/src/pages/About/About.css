@@ -1,0 +1,328 @@
+/* ─── About Page ─────────────────────────────────────────────────────────────── */
+
+.about-header {
+  text-align: center;
+  max-width: 650px;
+  margin: 0 auto var(--space-2xl);
+}
+
+.about-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 800;
+  margin-bottom: var(--space-md);
+}
+
+.about-header p {
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* ═══ Context ═══ */
+.about-context {
+  display: flex;
+  gap: var(--space-xl);
+  padding: var(--space-xl);
+  margin-bottom: var(--space-2xl);
+  align-items: flex-start;
+}
+
+.about-context-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  background: var(--color-accent-gradient);
+  color: white;
+  flex-shrink: 0;
+}
+
+.about-context h2 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: var(--space-md);
+}
+
+.about-context p {
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: var(--space-sm);
+}
+
+.about-context strong {
+  color: var(--color-text-primary);
+}
+
+/* ═══ Modules ═══ */
+.about-modules {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: var(--space-lg);
+  margin-bottom: var(--space-2xl);
+}
+
+.about-module {
+  padding: var(--space-xl);
+}
+
+.about-module-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.about-module-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  background: var(--color-accent-gradient);
+  color: white;
+}
+
+.about-module h3 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.about-module ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.about-module li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition-fast);
+}
+
+.about-module li:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.about-module li svg {
+  color: var(--color-risk-low);
+  flex-shrink: 0;
+}
+
+/* ═══ Architecture ═══ */
+.about-architecture {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.about-architecture h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 800;
+  margin-bottom: var(--space-2xl);
+}
+
+.architecture-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.arch-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: var(--space-lg) var(--space-xl);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  min-width: 140px;
+  transition: all var(--transition-base);
+}
+
+.arch-node:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-glow);
+}
+
+.arch-node span {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.arch-node small {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.arch-node-frontend {
+  color: var(--color-accent-secondary);
+  border-color: rgba(6, 182, 212, 0.2);
+}
+
+.arch-node-backend {
+  color: var(--color-risk-medium);
+  border-color: rgba(245, 158, 11, 0.2);
+}
+
+.arch-node-model {
+  color: var(--color-accent-primary);
+  border-color: rgba(99, 102, 241, 0.2);
+}
+
+.arch-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-text-muted);
+}
+
+.arch-arrow small {
+  font-size: 0.7rem;
+}
+
+/* ═══ Tech Stack ═══ */
+.about-tech {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.about-tech h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 800;
+  margin-bottom: var(--space-2xl);
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-lg);
+  text-align: left;
+}
+
+.tech-card {
+  padding: var(--space-xl);
+}
+
+.tech-card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.tech-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+}
+
+.tech-card h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tech-tag {
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--color-border);
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.tech-tag:hover {
+  border-color: var(--color-border-hover);
+  color: var(--color-text-accent);
+}
+
+/* ═══ Dataset ═══ */
+.about-dataset {
+  padding: var(--space-xl);
+  margin-bottom: var(--space-2xl);
+}
+
+.about-dataset-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+  color: var(--color-text-accent);
+}
+
+.about-dataset-header h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.about-dataset p {
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: var(--space-lg);
+}
+
+.about-dataset strong {
+  color: var(--color-text-primary);
+}
+
+.dataset-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ═══ CTA ═══ */
+.about-cta {
+  text-align: center;
+  margin-top: var(--space-xl);
+}
+
+/* ═══ Responsive ═══ */
+@media (max-width: 768px) {
+  .about-context {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .about-modules {
+    grid-template-columns: 1fr;
+  }
+
+  .architecture-flow {
+    flex-direction: column;
+  }
+
+  .arch-arrow {
+    transform: rotate(90deg);
+  }
+}
