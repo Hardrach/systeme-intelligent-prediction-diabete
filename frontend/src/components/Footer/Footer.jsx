@@ -1,4 +1,4 @@
-import { Activity, Heart } from "lucide-react";
+import { Activity } from "lucide-react";
 import { Link } from "react-router-dom";
 import "./Footer.css";
 
@@ -38,8 +38,8 @@ export default function Footer() {
 
         <div className="footer-bottom">
           <p>
-            © {new Date().getFullYear()} DiabetAI — Projet Universitaire. Fait avec{" "}
-            <Heart size={14} className="footer-heart" /> et de l'IA.
+            © {new Date().getFullYear()} DiabetAI — Projet Universitaire. App développée par{" "}
+            <a href="https://github.com/Hardrach" target="_blank" rel="noopener noreferrer" style={{color: 'var(--primary)', textDecoration: 'none'}}>Hardrach</a>.
           </p>
           <p className="footer-disclaimer">
             ⚠ Cette application est un projet académique. Elle ne remplace en
