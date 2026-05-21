@@ -5,3 +5,12 @@ __pycache__/
 *.pyc
 .env
 .DS_Store
+
+# Presentation slides & reports
+*.pptx
+PRESENTATION_*.md
+PRESENTATION_PPT.md
+RAPPORT_*.md
+project_summary.md
+lpour lanceer server
+screenshots/
