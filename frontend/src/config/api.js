@@ -14,6 +14,8 @@ const API_CONFIG = {
   ENDPOINTS: {
     predict: "/api/predict",
     health: "/api/health",
+    dashboard: "/api/dashboard",
+    scraped: "/api/scraped",
   },
 };
 

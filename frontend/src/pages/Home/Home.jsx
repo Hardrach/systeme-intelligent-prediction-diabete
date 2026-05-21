@@ -147,7 +147,7 @@ export default function Home() {
                 <span className="code-comment"># Charger le modèle ANN</span>
                 <br />
                 model = load_model(
-                <span className="code-string">"diabetes_model.h5"</span>)
+                <span className="code-string">"diabetes_model.keras"</span>)
                 <br />
                 <br />
                 <span className="code-comment"># Prédiction</span>

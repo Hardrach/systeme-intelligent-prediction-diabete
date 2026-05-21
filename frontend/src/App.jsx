@@ -5,6 +5,7 @@ import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home/Home";
 import Predict from "./pages/Predict/Predict";
 import About from "./pages/About/About";
+import Dashboard from "./pages/Dashboard/Dashboard";
 import "./App.css";
 
 export default function App() {
@@ -26,6 +27,7 @@ export default function App() {
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home />} />
             <Route path="/predict" element={<Predict />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/about" element={<About />} />
           </Routes>
         </AnimatePresence>

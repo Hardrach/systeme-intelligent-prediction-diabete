@@ -56,4 +56,43 @@ export const predictDiabetes = async (patientData) => {
   }
 };
 
+/**
+ * Récupère les données agrégées pour le tableau de bord.
+ * 
+ * @returns {Object} — stats, distribution, histogramme, corrélation, historique
+ */
+export const fetchDashboardData = async () => {
+  try {
+    const response = await apiClient.get(API_CONFIG.ENDPOINTS.dashboard);
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      throw new Error(
+        error.response.data?.error || "Erreur lors du chargement du dashboard."
+      );
+    } else if (error.request) {
+      throw new Error(
+        "Impossible de joindre le serveur. Vérifiez votre connexion ou réessayez."
+      );
+    } else {
+      throw new Error("Une erreur inattendue s'est produite.");
+    }
+  }
+};
+
+/**
+ * Récupère les données de web scraping.
+ * 
+ * @returns {Object} — source URL et liste des informations santé
+ */
+export const fetchScrapedData = async () => {
+  try {
+    const response = await apiClient.get(API_CONFIG.ENDPOINTS.scraped);
+    return response.data;
+  } catch (error) {
+    // Non-critical, return empty
+    return { success: false, data: [] };
+  }
+};
+
 export default apiClient;

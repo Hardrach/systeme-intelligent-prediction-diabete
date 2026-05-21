@@ -26,6 +26,7 @@ export default function Footer() {
           <h4 className="footer-links-title">Navigation</h4>
           <Link to="/" className="footer-link">Accueil</Link>
           <Link to="/predict" className="footer-link">Prédiction</Link>
+          <Link to="/dashboard" className="footer-link">Dashboard</Link>
           <Link to="/about" className="footer-link">À propos</Link>
         </div>
 

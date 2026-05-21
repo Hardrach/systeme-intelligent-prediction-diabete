@@ -5,6 +5,7 @@ import {
   Activity,
   Home,
   FileHeart,
+  BarChart3,
   Info,
   Menu,
   X,
@@ -14,6 +15,7 @@ import "./Navbar.css";
 const navLinks = [
   { path: "/", label: "Accueil", icon: Home },
   { path: "/predict", label: "Prédiction", icon: FileHeart },
+  { path: "/dashboard", label: "Dashboard", icon: BarChart3 },
   { path: "/about", label: "À propos", icon: Info },
 ];
 

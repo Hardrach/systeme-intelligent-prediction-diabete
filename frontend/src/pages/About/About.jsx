@@ -75,7 +75,7 @@ const modules = [
       "Architecture multicouche (Dense layers)",
       "Entraînement avec optimiseur Adam",
       "Évaluation : Accuracy, Loss, Confusion Matrix",
-      "Sauvegarde du modèle (.h5)",
+      "Sauvegarde du modèle (.keras)",
       "Decision Layer avec 3 niveaux de risque",
     ],
   },

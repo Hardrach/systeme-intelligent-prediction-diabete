@@ -350,12 +350,28 @@ export default function Predict() {
   );
 }
 
-/* ─── Result Card Component ─────────────────────────────────────────────────── */
-
 function ResultCard({ result, onReset }) {
-  const pred = result.prediction;
+  // Support both new flat format and legacy nested format
+  const pred = result.prediction_details || result.prediction || {};
+  const predictionLabel = typeof result.prediction === "string"
+    ? result.prediction
+    : (pred.probability > 0.5 ? "Diabetic" : "Non-Diabetic");
+  const confidence = result.confidence ?? pred.score ?? 0;
+  const riskText = result.risk ?? pred.risk ?? "";
+  const recommendation = result.recommendation ?? pred.recommendation ?? "";
+  const riskLevel = pred.risk_level || (
+    riskText.toLowerCase().includes("low") ? "low" :
+    riskText.toLowerCase().includes("medium") ? "medium" : "high"
+  );
+  const riskColor = pred.color || (
+    riskLevel === "low" ? "#10B981" :
+    riskLevel === "medium" ? "#F59E0B" : "#EF4444"
+  );
+  const probability = pred.probability ?? (confidence / 100);
+  const score = pred.score ?? confidence;
+
   const RiskIcon = (() => {
-    switch (pred.risk_level) {
+    switch (riskLevel) {
       case "low": return ShieldCheck;
       case "medium": return AlertTriangle;
       case "high": return ShieldAlert;
@@ -363,7 +379,7 @@ function ResultCard({ result, onReset }) {
     }
   })();
 
-  const riskClass = `risk-${pred.risk_level}`;
+  const riskClass = `risk-${riskLevel}`;
 
   return (
     <div className="result-container">
@@ -375,9 +391,9 @@ function ResultCard({ result, onReset }) {
         transition={{ delay: 0.1, type: "spring" }}
       >
         <div className="result-score-header">
-          <span className={`badge badge-${pred.risk_level}`}>
+          <span className={`badge badge-${riskLevel}`}>
             <RiskIcon size={14} />
-            Risque {pred.risk_level === "low" ? "Faible" : pred.risk_level === "medium" ? "Moyen" : "Élevé"}
+            {riskText || (riskLevel === "low" ? "Low Risk" : riskLevel === "medium" ? "Medium Risk" : "High Risk")}
           </span>
           <span className="result-model-tag">
             <Activity size={12} />
@@ -400,14 +416,14 @@ function ResultCard({ result, onReset }) {
               cy="60"
               r="54"
               fill="none"
-              stroke={pred.color}
+              stroke={riskColor}
               strokeWidth="8"
               strokeLinecap="round"
               strokeDasharray={`${2 * Math.PI * 54}`}
-              strokeDashoffset={`${2 * Math.PI * 54 * (1 - pred.probability)}`}
+              strokeDashoffset={`${2 * Math.PI * 54 * (1 - probability)}`}
               initial={{ strokeDashoffset: 2 * Math.PI * 54 }}
               animate={{
-                strokeDashoffset: 2 * Math.PI * 54 * (1 - pred.probability),
+                strokeDashoffset: 2 * Math.PI * 54 * (1 - probability),
               }}
               transition={{ duration: 1.5, ease: "easeOut", delay: 0.3 }}
               transform="rotate(-90 60 60)"
@@ -416,19 +432,19 @@ function ResultCard({ result, onReset }) {
           <div className="result-score-value">
             <motion.span
               className="result-score-number"
-              style={{ color: pred.color }}
+              style={{ color: riskColor }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
             >
-              {pred.score}
+              {score}
             </motion.span>
             <span className="result-score-percent">%</span>
           </div>
         </div>
 
-        <h2 className="result-diagnostic" style={{ color: pred.color }}>
-          {pred.diagnostic}
+        <h2 className="result-diagnostic" style={{ color: riskColor }}>
+          {predictionLabel === "Diabetic" ? "Diabétique" : "Non-Diabétique"} — Confiance {confidence}%
         </h2>
       </motion.div>
 
@@ -440,80 +456,86 @@ function ResultCard({ result, onReset }) {
         transition={{ delay: 0.3 }}
       >
         <h3>
-          <CheckCircle2 size={20} style={{ color: pred.color }} />
+          <CheckCircle2 size={20} style={{ color: riskColor }} />
           Recommandation Médicale
         </h3>
-        <p className="result-recommendation-text">{pred.recommendation}</p>
+        <p className="result-recommendation-text">{recommendation}</p>
 
-        <div className="result-actions-list">
-          <h4>Actions recommandées :</h4>
-          <ul>
-            {pred.actions.map((action, i) => (
-              <motion.li
-                key={i}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.5 + i * 0.08 }}
-              >
-                <CheckCircle2 size={14} style={{ color: pred.color }} />
-                {action}
-              </motion.li>
-            ))}
-          </ul>
-        </div>
+        {pred.actions && (
+          <div className="result-actions-list">
+            <h4>Actions recommandées :</h4>
+            <ul>
+              {pred.actions.map((action, i) => (
+                <motion.li
+                  key={i}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.5 + i * 0.08 }}
+                >
+                  <CheckCircle2 size={14} style={{ color: riskColor }} />
+                  {action}
+                </motion.li>
+              ))}
+            </ul>
+          </div>
+        )}
       </motion.div>
 
       {/* Patient Data Summary */}
-      <motion.div
-        className="result-summary glass-card"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5 }}
-      >
-        <h3>
-          <FileHeart size={20} />
-          Données Patient Analysées
-        </h3>
-        <div className="result-data-grid">
-          {Object.entries(result.input_data).map(([key, value]) => (
-            <div key={key} className="result-data-item">
-              <span className="result-data-label">{key}</span>
-              <span className="result-data-value">{value}</span>
-            </div>
-          ))}
-        </div>
-      </motion.div>
+      {result.input_data && (
+        <motion.div
+          className="result-summary glass-card"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+        >
+          <h3>
+            <FileHeart size={20} />
+            Données Patient Analysées
+          </h3>
+          <div className="result-data-grid">
+            {Object.entries(result.input_data).map(([key, value]) => (
+              <div key={key} className="result-data-item">
+                <span className="result-data-label">{key}</span>
+                <span className="result-data-value">{value}</span>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      )}
 
       {/* Model Info */}
-      <motion.div
-        className="result-model-info glass-card"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.6 }}
-      >
-        <h3>
-          <Activity size={20} />
-          Informations du Modèle
-        </h3>
-        <div className="result-model-grid">
-          <div className="result-model-item">
-            <span className="result-model-label">Type</span>
-            <span className="result-model-value">{result.model_info.type}</span>
+      {result.model_info && (
+        <motion.div
+          className="result-model-info glass-card"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+        >
+          <h3>
+            <Activity size={20} />
+            Informations du Modèle
+          </h3>
+          <div className="result-model-grid">
+            <div className="result-model-item">
+              <span className="result-model-label">Type</span>
+              <span className="result-model-value">{result.model_info.type}</span>
+            </div>
+            <div className="result-model-item">
+              <span className="result-model-label">Framework</span>
+              <span className="result-model-value">{result.model_info.framework}</span>
+            </div>
+            <div className="result-model-item">
+              <span className="result-model-label">Preprocessing</span>
+              <span className="result-model-value">{result.model_info.preprocessing}</span>
+            </div>
+            <div className="result-model-item">
+              <span className="result-model-label">Probabilité brute</span>
+              <span className="result-model-value">{probability}</span>
+            </div>
           </div>
-          <div className="result-model-item">
-            <span className="result-model-label">Framework</span>
-            <span className="result-model-value">{result.model_info.framework}</span>
-          </div>
-          <div className="result-model-item">
-            <span className="result-model-label">Preprocessing</span>
-            <span className="result-model-value">{result.model_info.preprocessing}</span>
-          </div>
-          <div className="result-model-item">
-            <span className="result-model-label">Probabilité brute</span>
-            <span className="result-model-value">{pred.probability}</span>
-          </div>
-        </div>
-      </motion.div>
+        </motion.div>
+      )}
 
       {/* Back Button */}
       <motion.div
@@ -549,3 +571,4 @@ function ResultCard({ result, onReset }) {
     </div>
   );
 }
+
