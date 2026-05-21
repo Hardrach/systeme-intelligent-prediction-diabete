@@ -121,12 +121,44 @@ const initialFormData = Object.fromEntries(
   formFields.map((f) => [f.name, ""])
 );
 
+const templates = {
+  healthy: {
+    Pregnancies: "1",
+    Glucose: "85",
+    BloodPressure: "66",
+    SkinThickness: "20",
+    Insulin: "79",
+    BMI: "24.3",
+    DiabetesPedigreeFunction: "0.15",
+    Age: "22",
+  },
+  diabetic: {
+    Pregnancies: "6",
+    Glucose: "168",
+    BloodPressure: "80",
+    SkinThickness: "35",
+    Insulin: "120",
+    BMI: "36.5",
+    DiabetesPedigreeFunction: "0.85",
+    Age: "52",
+  },
+};
+
 export default function Predict() {
   const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [apiError, setApiError] = useState(null);
+
+  const handleLoadTemplate = (type) => {
+    const template = templates[type];
+    if (template) {
+      setFormData(template);
+      setErrors({});
+      setApiError(null);
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -238,6 +270,36 @@ export default function Predict() {
               exit={{ opacity: 0, y: -20 }}
               variants={fadeUp}
             >
+              {/* Quick Test Templates */}
+              <motion.div
+                className="predict-templates-bar glass-card"
+                variants={fadeUp}
+                custom={0.2}
+              >
+                <div className="templates-info">
+                  <Activity size={16} className="text-accent animate-pulse" />
+                  <span><strong>Test Rapide :</strong> Chargez un profil pour tester instantanément le modèle ANN.</span>
+                </div>
+                <div className="templates-actions">
+                  <button
+                    type="button"
+                    className="btn btn-template btn-healthy"
+                    onClick={() => handleLoadTemplate("healthy")}
+                  >
+                    <ShieldCheck size={14} />
+                    Profil Sain (Risque Négatif)
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-template btn-diabetic"
+                    onClick={() => handleLoadTemplate("diabetic")}
+                  >
+                    <ShieldAlert size={14} />
+                    Profil Diabétique (Risque Positif)
+                  </button>
+                </div>
+              </motion.div>
+
               <div className="predict-form-grid">
                 {formFields.map((field, i) => (
                   <motion.div
