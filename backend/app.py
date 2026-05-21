@@ -115,7 +115,7 @@ def compute_dashboard_stats():
             "non_diabetic": non_diabetic,
             "train_accuracy": train_accuracy,
             "test_accuracy": test_accuracy,
-            "ann_accuracy": train_accuracy,
+            "ann_accuracy": test_accuracy,
         }
         logger.info("📊  Statistiques du dashboard chargées avec succès : %s", str(dashboard_stats))
     except Exception as e:
@@ -469,7 +469,7 @@ def dashboard():
                 "non_diabetic": non_diabetic,
                 "train_accuracy": train_acc_cached if train_acc_cached is not None else 88.39,
                 "test_accuracy": test_accuracy,
-                "ann_accuracy": train_acc_cached if train_acc_cached is not None else 88.39,  # pour la compatibilité avec le frontend
+                "ann_accuracy": test_accuracy,  # la vraie accuracy (~72.7% ou 74.8% dynamique) pour le frontend
             },
             "outcome_distribution": outcome_distribution,
             "glucose_histogram": glucose_histogram,

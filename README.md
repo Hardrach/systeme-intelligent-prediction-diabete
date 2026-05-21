@@ -52,7 +52,7 @@ Cette version intègre un **Dashboard interactif complet** propulsé par **Recha
   - **Histogramme de la Glycémie** : Distribution fréquentielle dynamique de la variable critique *Glucose*.
   - **Courbes d'Apprentissage** : Analyse historique des métriques de perte (*Loss*) et de précision (*Accuracy*) pour l'entraînement et la validation à chaque epoch.
   - **Heatmap de Corrélation** : Matrice interactive des coefficients de Pearson pour comprendre les liens d'interdépendance des indicateurs physiologiques.
-- 🕸️ **Web Scraping d'Informations Médicales** : Extraction automatique d'articles et recommandations nutrition/sport directement issues de portails de référence (ex: American Diabetes Association) via un parseur d'informations intégré.
+- 🕸️ **Web Scraping pour l'Enrichissement Médical** : Extraction d'articles et de recommandations de santé (nutrition, activité physique) depuis des portails médicaux de référence (ex: American Diabetes Association, OMS). Ce scraping n'est pas accessoire : il sert à **enrichir dynamiquement le dashboard** en proposant au patient une éducation thérapeutique concrète (recettes IG bas, exercices de prévention), transformant l'outil de prédiction clinique brute en un accompagnateur de vie préventif et actionnable.
 - 🎨 **Interface Premium "Medical Glassmorphism"** : Charte visuelle sombre, moderne et ultra-harmonieuse avec animations de cartes interactives animées via `Framer Motion`.
 
 ---
@@ -105,7 +105,7 @@ Le flux de traitement des données suit rigoureusement la méthodologie scientif
    - Couche cachée dense de 32 neurones (activation `ReLU`).
    - Couche intermédiaire dense de 16 neurones (activation `ReLU`).
    - Couche de sortie dense à 1 neurone (activation `Sigmoid` pour produire une probabilité).
-4. **Métriques d'Entraînement** : Obtention d'une précision de validation finale atteignant **88.39%** sur l'historique d'entraînement.
+4. **Généralisation et Métriques Réelles** : Pour éviter tout surapprentissage (*overfitting*), la performance de l'ANN est évaluée sur des données réelles de test non vues (exactitude réelle de **72.7% à 74.8%**). Bien que la précision brute sur le jeu d'entraînement s'élève à 88.39%, c'est cette vraie précision de validation (~72.7% ou 74.8% dynamique) qui est fièrement affichée en production sur le tableau de bord comme métrique de confiance médicale rigoureuse.
 
 ---
 

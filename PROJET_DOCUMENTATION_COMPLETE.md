@@ -117,8 +117,7 @@ Le modèle prédictif est un Réseau de Neurones Artificiels (ANN) entraîné so
 ### B. Métriques de performance
 * **Loss** : Binary Crossentropy (idéale pour la classification binaire).
 * **Optimiseur** : Adam (taux d'apprentissage adaptatif).
-* **Précision d'entraînement (Accuracy)** : **88.39%** (lue directement depuis l'historique d'apprentissage final).
-* **Précision de Test (Validation)** : **74.8%** (obtenue sur des données que le modèle n'a jamais vues lors de l'entraînement).
+* **Précision Réelle du Modèle (Test/Validation)** : **~72.7% à 74.8%** (représente l'exactitude réelle face à de nouveaux patients). La précision brute sur le jeu d'entraînement atteint 88.39%, mais pour garantir une évaluation clinique rigoureuse et éviter tout biais de surapprentissage (*overfitting*), c'est la vraie métrique de test d'environ **72.7%** (ou 74.8% sur le jeu de validation) qui est utilisée et affichée comme indicateur de performance principal.
 
 ---
 
@@ -143,6 +142,13 @@ Le tableau de bord permet de visualiser en temps réel les données de recherche
 3. **Courbes de Performance (Line Charts)** : Représentation dynamique de la perte (*Loss*) et de la précision (*Accuracy*) au fil des époques de l'entraînement pour auditer la qualité d'apprentissage du modèle ANN.
 4. **Matrice de corrélation (Heatmap)** : Affichage interactif des corrélations biométriques (ex: lien fort entre l'IMC et l'épaisseur de la peau).
 5. **Recommandations scrapées** : Des articles de nutrition et d'exercice physique collectés automatiquement sur les portails de santé pour accompagner le patient.
+
+### 🕸️ Le Rôle Crucial du Web Scraping dans l'Enrichissement Médical
+Le module de **Web Scraping** (via la route `/api/scraped`) n'est pas un simple outil technique secondaire, mais joue un **rôle clinique fondamental d'enrichissement de l'information et d'accompagnement thérapeutique** :
+
+* **Pont entre Données Brutes et Recommandations Actionnables** : Les prédictions d'IA et les graphiques statistiques fournissent des constats physiologiques. Le Scraping de portails médicaux de référence (ex: *American Diabetes Association*, *OMS*, etc.) convertit ces constats en **solutions concrètes au quotidien** pour le patient.
+* **Enrichissement Dynamique du Dashboard** : Au-delà des chiffres froids de glycémie ou d'IMC, le tableau de bord intègre dynamiquement une section d'éducation thérapeutique alimentée par le scraping. Cela permet au patient d'avoir un accès centralisé et fiable à des articles de vulgarisation scientifique validés sur la nutrition (recettes à index glycémique bas, régimes pauvres en sucres rapides) et l'activité physique adaptée (exercices d'endurance modérés).
+* **Autonomisation du Patient (Patient Empowerment)** : L'application web ne se contente pas d'être un outil de diagnostic passif. Grâce au scraping, elle devient un **compagnon de santé préventif intelligent** qui vulgarise les concepts clés du diabète de type 2 et offre des ressources éducatives vérifiées, évitant ainsi aux patients de chercher des informations non certifiées sur internet.
 
 ---
 
